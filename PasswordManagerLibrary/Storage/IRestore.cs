@@ -1,8 +1,10 @@
-﻿namespace MenagerCore.Storage
+﻿using MenagerCore.DTO;
+
+namespace MenagerCore.Storage
 {
     public interface IRestore
     {
-        Task<Dictionary<string, (int position, int length)>> Read();
-        Task Save(Dictionary<string, (int position, int length)> manageInfo);
+        Task<Dictionary<string, ReadLocation>> Read();
+        Task Save(Dictionary<string, ReadLocation> manageInfo);
     }
 }

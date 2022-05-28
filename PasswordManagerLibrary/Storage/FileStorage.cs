@@ -4,35 +4,21 @@ namespace MenagerCore.Storage
 {
     public class FileStorage : IStorage
     {
-        private readonly string currentPath;
-
-        public FileStorage(string path)
+        public async Task Save(Stream stream, byte[] data)
         {
-            currentPath = path;
-        }
-
-        public async Task Save(byte[] data)
-        {
-            using FileStream fileStream = new FileStream(currentPath, FileMode.OpenOrCreate, FileAccess.Write);
-            fileStream.Position = fileStream.Length;
-
-            using BinaryWriter writer = new BinaryWriter(fileStream, Encoding.UTF8);
+            stream.Position = stream.Length;
+            using BinaryWriter writer = new BinaryWriter(stream, Encoding.UTF8);
 
             await Task.Run(() => writer.Write(data));
         }
 
-        public async Task<byte[]> Read(int position, int length)
+        public async Task<byte[]> Read(Stream stream, int position, int length)
         {
-            if (!File.Exists(currentPath))
-            {
-                throw new FileNotFoundException(currentPath);
-            }
-
-            using FileStream fileStream = new FileStream(currentPath, FileMode.Open, FileAccess.Read);
-            using BinaryReader reader = new BinaryReader(fileStream, Encoding.UTF8);
+            stream.Position = position;
+            using BinaryReader reader = new BinaryReader(stream, Encoding.UTF8);
 
             byte[] bytes = new byte[length];
-            await Task.Run(() => reader.Read(bytes, position, length));
+            await Task.Run(() => reader.Read(bytes));
 
             return bytes;
         }

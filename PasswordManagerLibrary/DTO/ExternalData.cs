@@ -6,6 +6,6 @@
 
         public string? Password { get; set; }
 
-        public string Comment { get; init; }
+        public string? Comment { get; set; }
     }
 }
