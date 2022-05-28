@@ -1,4 +1,6 @@
 ﻿namespace MenagerCore.DTO
+
+#pragma warning disable CS8618
 {
     public class ExternalData
     {
