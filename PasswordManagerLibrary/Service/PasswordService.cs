@@ -12,7 +12,7 @@ namespace MenagerCore
         private readonly AESKeys aESKeys; 
         private Dictionary<string, ReadLocation>? marks;
 
-        public PasswordService(IRestore restore, IStorage passwordStorage, IKeyService keyService, string path)
+        public PasswordService(IRestore restore, IStorage passwordStorage, IKeyService keyService, string path = "data/storage")
         {
             this.restore = restore;
             this.passwordStorage = passwordStorage;

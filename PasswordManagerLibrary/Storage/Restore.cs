@@ -7,7 +7,7 @@ namespace MenagerCore.Storage
     {
         private readonly string sysPath;
 
-        public Restore(string sysPath)
+        public Restore(string sysPath = "data/restore")
         {
             this.sysPath = sysPath;
         }
