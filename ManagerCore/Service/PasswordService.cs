@@ -20,16 +20,23 @@ namespace MenagerCore
             storePath = path;
         }
 
-        public async Task SavePassword(ExternalData inputData)
+        public async Task<string> SavePassword(ExternalData inputData)
         {
+            string result = "Sucsessed";
+            if (marks!.ContainsKey(inputData.Key))
+            {
+                return "Save failed. Password name already exist";
+            }
+
             if (inputData is null)
             {
                 throw new ArgumentNullException(nameof(inputData));
             }
 
-            if (inputData.Password is null)
+            if (string.IsNullOrWhiteSpace(inputData.Password))
             {
                 inputData.Password = Core.GeneratePass();
+                result = inputData.Password;
             }
 
             if (inputData.Comment  is null)
@@ -52,6 +59,7 @@ namespace MenagerCore
             marks!.Add(inputData.Key,new ReadLocation() { Position = (int)streamStorage.Length, Length = bytes.Length });
 
             await Task.Run(() => passwordStorage.Save(streamStorage, bytes));
+            return result;
         }
 
         public async Task<ExternalData> ReadPassword(string key)
@@ -61,7 +69,7 @@ namespace MenagerCore
                 return await BuildData(key);
             }
 
-            throw new InvalidOperationException("Key not found!");
+            return new ExternalData() { Comment = $"Password with name {key} not found!" };
         }
 
         public async Task RestorMarks()
@@ -119,7 +127,7 @@ namespace MenagerCore
             {
                 Key = dataArray[0],
                 Password = decryptPass,
-                Comment = dataArray[2],
+                Comment = dataArray.Length > 2 ? dataArray[2] : string.Empty,
             };
         }
         

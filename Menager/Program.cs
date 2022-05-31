@@ -2,7 +2,7 @@
 using MenagerCore.DTO;
 using MenagerCore.Storage;
 
-PasswordService service = new PasswordService(new Restore("restore"), new FileStorage(), new AESKeyService(), "storeage");
+PasswordService service = new PasswordService(new Restore("restore"), new FileStorage(), new AESKeyService("data/secure"), "storage");
 await service.RestorMarks();
 
 Console.WriteLine("Write key");

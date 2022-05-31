@@ -15,17 +15,23 @@
         </LinearGradientBrush>
     </Window.Background>
     <Grid Height="464" VerticalAlignment="Bottom">
-        <Grid x:Name="Menu">
+        <Grid x:Name="Menu" d:IsHidden="True">
             <Label Content="WELCOME" HorizontalAlignment="Center" Height="33" Margin="0,30,0,0" VerticalAlignment="Top" Width="104" FontSize="16" Foreground="#FFEEB966" FontFamily="Arial Black"/>
             <Button x:Name="ToLoder" Content="SHOW PASSWORD" Click="ToLoder_Click" HorizontalAlignment="Center" Height="60" Margin="0,100,0,0" VerticalAlignment="Top" Width="520" FontFamily="Arial Black" FontSize="18" Background="#FFEEB966"/>
             <Button x:Name="ToGenerator" Content="GENERATE NEW PASSWORD" Click="ToGenerator_Click" HorizontalAlignment="Center" Height="60" Margin="0,200,0,0" VerticalAlignment="Top" Width="520" FontFamily="Arial Black" FontSize="18" Background="#FFEEB966"/>
             <Button x:Name="ToCustom" Content="SAVE CUSTOM PASSWORD" Click="ToCustom_Click" HorizontalAlignment="Center" Height="60" Margin="0,300,0,0" VerticalAlignment="Top" Width="520" FontFamily="Arial Black" FontSize="18" Background="#FFEEB966"/>
         </Grid>
-        <Grid x:Name="PassRead">
+        <Grid x:Name="PassRead" d:IsHidden="True">
+            <Label Content="NAME OF&#xD;&#xA;PASSWORD" HorizontalAlignment="Left" Height="55" Margin="40,38,0,0" VerticalAlignment="Top" Width="122" FontSize="16" Foreground="White" FontFamily="Arial Black" Background="{x:Null}"/>
+            <TextBox x:Name="NameR" HorizontalAlignment="Left" Height="45" Margin="198,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontSize="18"/>
+            <TextBlock x:Name="PasswordR" HorizontalAlignment="Left" Height="35" Margin="40,307,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="359" FontSize="18" Background="#FF0B1C41" Foreground="#FF60FC5E" FontFamily="Arial Black"/>
+            <TextBlock x:Name="CommentR" HorizontalAlignment="Center" Height="94" Margin="0,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="520" FontSize="18" Background="#FF0B1C41" Foreground="#FF60FC5E" FontFamily="Arial Black"/>
+            <Button Content="Copy" HorizontalAlignment="Left" Margin="452,307,0,0" VerticalAlignment="Top" Height="35" Width="85" FontFamily="Arial Black" Click="CopyR_Click"/>
+            <Button x:Name="Read" Content="SHOW PASSWORD" HorizontalAlignment="Left" Height="40" Margin="40,366,0,0" VerticalAlignment="Top" Width="320" Click="Show_Click" FontSize="18" FontFamily="Arial Black"/>
         </Grid>
         <Grid x:Name="PassGenerator" d:IsHidden="True">
-            <TextBox x:Name="Name" HorizontalAlignment="Left" Height="45" Margin="198,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontSize="18"/>
-            <TextBox x:Name="Comment" HorizontalAlignment="Left" Height="45" Margin="198,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontSize="18"/>
+            <TextBox x:Name="NameG" HorizontalAlignment="Left" Height="45" Margin="198,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontSize="18"/>
+            <TextBox x:Name="CommentG" HorizontalAlignment="Left" Height="45" Margin="198,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontSize="18"/>
             <Slider x:Name="NumbersCount" HorizontalAlignment="Left"
                 Height="33" Margin="198,236,0,0" VerticalAlignment="Top"
                 Width="362" Minimum="6" Maximum="30" Orientation="Horizontal"
@@ -34,13 +40,21 @@
             <Label Content="COMMENT&#xD;&#xA;(can be empty)" HorizontalAlignment="Left" Height="55" Margin="40,126,0,0" VerticalAlignment="Top" Width="153" FontSize="16" Foreground="White" FontFamily="Arial Black"/>
             <Label Content="COUNT OF&#xD;&#xA;SYMBOLS" HorizontalAlignment="Left" Height="55" Margin="40,225,0,0" VerticalAlignment="Top" Width="106" FontSize="16" Foreground="#FFFDFDFD" FontFamily="Arial Black"/>
             <TextBlock HorizontalAlignment="Left" Height="35" Margin="156,236,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" FontSize="18" Foreground="#FF60FC5E" FontFamily="Arial Black" Text="{Binding Value, ElementName=NumbersCount}"/>
-            <Button Content="Copy" HorizontalAlignment="Left" Margin="452,307,0,0" VerticalAlignment="Top" Height="35" Width="85" FontFamily="Arial Black" Click="Copy_Click"/>
+            <Button Content="Copy" HorizontalAlignment="Left" Margin="452,307,0,0" VerticalAlignment="Top" Height="35" Width="85" FontFamily="Arial Black" Click="CopyG_Click"/>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" Height="55" Margin="0,298,0,0" VerticalAlignment="Top" Width="520">
-                <TextBlock HorizontalAlignment="Left" Height="35" Margin="15,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="359" FontSize="18" Foreground="#FF60FC5E" FontFamily="Arial Black"/>
+                <TextBlock x:Name="PasswordG" HorizontalAlignment="Left" Height="35" Margin="15,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="359" FontSize="18" Foreground="#FF60FC5E" FontFamily="Arial Black"/>
             </Border>
             <Button x:Name="Generate" Content="GENERATE" HorizontalAlignment="Left" Height="40" Margin="40,366,0,0" VerticalAlignment="Top" Width="320" Click="Generate_Click" FontSize="18" FontFamily="Arial Black"/>
         </Grid>
         <Grid x:Name="PassCustom">
+            <Label Content="NAME OF&#xD;&#xA;PASSWORD" HorizontalAlignment="Left" Height="55" Margin="40,38,0,0" VerticalAlignment="Top" Width="122" FontSize="16" Foreground="White" FontFamily="Arial Black" Background="{x:Null}"/>
+            <Label Content="COMMENT&#xD;&#xA;(can be empty)" HorizontalAlignment="Left" Height="55" Margin="40,126,0,0" VerticalAlignment="Top" Width="153" FontSize="16" Foreground="White" FontFamily="Arial Black"/>
+            <Label Content="NEW&#xD;&#xA;PASSWORD" HorizontalAlignment="Left" Height="55" Margin="40,206,0,0" VerticalAlignment="Top" Width="153" FontSize="16" Foreground="White" FontFamily="Arial Black"/>
+            <TextBox x:Name="NameC" HorizontalAlignment="Left" Height="45" Margin="198,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontSize="18"/>
+            <TextBox x:Name="CommentC" HorizontalAlignment="Left" Height="45" Margin="198,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontSize="18"/>
+            <TextBox x:Name="PasswordC" HorizontalAlignment="Left" Height="45" Margin="198,206,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontSize="18"/>
+            <TextBlock x:Name="OpResult" HorizontalAlignment="Left" Height="35" Margin="40,307,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" FontSize="18" Background="#FF0B1C41" Foreground="#FFED4242" FontFamily="Arial Black"/>
+            <Button x:Name="Save" Content="SAVE" HorizontalAlignment="Left" Height="40" Margin="40,366,0,0" VerticalAlignment="Top" Width="320" Click="Save_Click" FontSize="18" FontFamily="Arial Black"/>
         </Grid>
         <Button x:Name="ToMenu" Content="MENU" HorizontalAlignment="Right" Height="40" Margin="0,366,40,0" VerticalAlignment="Top" Width="120" Click="ToMenu_Click" FontSize="16" FontFamily="Arial Black" Background="#FFED4242"/>
     </Grid>

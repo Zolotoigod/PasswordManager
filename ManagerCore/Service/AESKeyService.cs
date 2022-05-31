@@ -5,7 +5,12 @@ namespace MenagerCore
 {
     public class AESKeyService : IKeyService
     {
-        private const string securePath = "data/secure.dd";
+        private readonly string securePath;
+
+        public AESKeyService(string path)
+        {
+            securePath = path;
+        }
 
         public AESKeys InitKeys()
         {
