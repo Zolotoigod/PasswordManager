@@ -1,9 +1,14 @@
-﻿
-using MenagerCore;
-using System.Security.Cryptography;
+﻿/*PasswordService service = new PasswordService(new Restore("restore"), new FileStorage(), new AESKeyService("data/secure"), "storage");
+await service.RestorMarks();
 
-var key = Console.ReadLine();
-using Aes newAes = Aes.Create();
-await ImportExport.WriteToFile(key, Core.Incrypted(Core.GeneratePass(), newAes.Key, newAes.IV));
+Console.WriteLine("Write key");
+string? key = Console.ReadLine();
 
-Console.WriteLine((Core.Decrypted(await ImportExport.ReadFromFile(key), newAes.Key, newAes.IV)));
+await service.SavePassword(new ExternalData() { Key = key });
+
+var data = await service.ReadPassword(key);
+
+Console.WriteLine(data.Key.ToString() + " - " + data.Password!.ToString());
+Console.ReadLine();
+
+await service.SaveMark();*/
